@@ -11,9 +11,10 @@ using System;
 namespace ObjectiveTracker.Migrations
 {
     [DbContext(typeof(ObjectiveTrackerContext))]
-    partial class ObjectiveTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20171228133920_RemoveBadTable")]
+    partial class RemoveBadTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

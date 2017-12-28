@@ -21,7 +21,5 @@ namespace ObjectiveTracker.DataAccess
         {
 
         }
-
-        public DbSet<ObjectiveTracker.Models.DTOs.ObjectiveTaskDTO> ObjectiveTaskDTO { get; set; }
     }
 }
