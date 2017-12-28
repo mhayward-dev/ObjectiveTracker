@@ -1,0 +1,69 @@
+﻿@model IEnumerable<ObjectiveTracker.Models.DTOs.ObjectiveDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>My Objectives</h2>
+
+<p>
+    <a asp-action="Create" asp-route-employeeId="@ViewData["EmployeeId"]">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>Tasks</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var objective in Model)
+        {
+            <tr class="@( objective.IsComplete ? "table-success" : "" )">
+                <td>
+                    @Html.DisplayFor(modelItem => objective.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => objective.Description)
+                </td>
+                <td>
+                    @foreach (var ot in objective.Tasks)
+                    {
+                        <div>
+                            @if (ot.IsComplete)
+                            {
+                                <s>&bull; @ot.Description</s>
+                            }
+                            else
+                            {
+                                <span>&bull; @ot.Description</span>
+                            }
+
+                            &nbsp;
+                            @Html.ActionLink("Update", "Edit", "Tasks", routeValues: new { id = ot.Id, employeeId = objective.EmployeeId })
+                        </div>
+                    }
+                </td>
+                @if (objective.IsComplete)
+                {
+                    <td class="text-success">Complete</td>
+                }
+                else
+                {
+                    <td class="text-primary">Not Yet Complete</td>
+                }
+                <td>
+                    <a asp-action="Edit" asp-route-id="@objective.Id">Edit Objective</a> |
+                    @Html.ActionLink("Create Task", "Create", "Tasks", routeValues: new { objectiveId = objective.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

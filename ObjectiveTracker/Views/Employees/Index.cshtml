@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ObjectiveTracker.Models.DTOs.EmployeeDTO>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Employees</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var empl in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => empl.FullName)
+                </td>
+                <td>
+                    @Html.ActionLink("See Objectives", "Index", "Objectives", routeValues: new { id = empl.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
